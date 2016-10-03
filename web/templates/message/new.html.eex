@@ -1,0 +1,6 @@
+<h2>New message</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: song_message_path(@conn, :create, @song) %>
+
+<%= link "Back", to: song_message_path(@conn, :index, @song) %>

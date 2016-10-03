@@ -1,0 +1,20 @@
+<h2>Listing Songs</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for song <- @songs do %>
+      <tr>
+        <td><%= song.title %></td>
+        <td class="text-right">
+          <%= link "Edit", to: song_path(@conn, :show, song) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

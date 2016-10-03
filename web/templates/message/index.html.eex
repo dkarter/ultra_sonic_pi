@@ -1,0 +1,22 @@
+<h2>Listing messages for <%= @song.title %></h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Song</th>
+      <th>Body</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for message <- @messages do %>
+    <tr>
+      <td><%= message.song_id %></td>
+      <td><%= message.body %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New message", to: song_message_path(@conn, :new, @song) %>

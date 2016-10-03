@@ -1,0 +1,11 @@
+<h1><%= @song.title %></h1>
+
+<div id="app-container">
+
+</div>
+
+<form>
+  <textarea id="codeContainer" data-id="<%= @song.id %>"><%= @song.body %></textarea>
+</form>
+
+<button id="playButton">Play</button>
