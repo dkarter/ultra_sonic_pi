@@ -1,3 +1,7 @@
+Note: this is just a POS and a way to learn about channels in Phoenix. Feel free
+to play with it but don't expect everything to work. Also the javascript code
+needs some cleaning up, may
+
 # UltraSonicPi
 
 To start your Phoenix app:
