@@ -1,6 +1,13 @@
 defmodule UltraSonicPi.Router do
   use UltraSonicPi.Web, :router
 
+  use ExAdmin.Router
+  # your app's routes
+  scope "/admin", ExAdmin do
+    pipe_through :browser
+    admin_routes()
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
