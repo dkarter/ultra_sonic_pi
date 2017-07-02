@@ -10,7 +10,7 @@
 
     <title>Hello UltraSonicPi!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-<link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
+    <link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
     <link rel="stylesheet" href="https://codemirror.net/theme/dracula.css">
     <script src="https://codemirror.net/lib/codemirror.js"></script>
     <script src="https://codemirror.net/keymap/vim.js"></script>

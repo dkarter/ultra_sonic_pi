@@ -8,4 +8,5 @@
   <textarea id="codeContainer" data-id="<%= @song.id %>"><%= @song.body %></textarea>
 </form>
 
+<ul id="message-log" />
 <button id="playButton">Play</button>

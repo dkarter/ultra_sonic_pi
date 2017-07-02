@@ -38,5 +38,7 @@ defmodule UltraSonicPi.Endpoint do
     key: "_ultra_sonic_pi_key",
     signing_salt: "8p51v97+"
 
+  # TODO: set encryption_salt ^^^
+
   plug UltraSonicPi.Router
 end

@@ -25,6 +25,8 @@
     "webpack": "^1.13.2"
   },
   "dependencies": {
+    "moment": "^2.18.1",
+    "random-color": "^1.0.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   }
