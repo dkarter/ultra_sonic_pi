@@ -1,0 +1,6 @@
+<div class="row">
+  <%= form_for @conn, auth_path(@conn, :sign_in), [as: :user], fn f -> %>
+    <%= text_input f, :username, placeholder: "name...", class: "form-control" %>
+    <button type="submit" class="btn btn-primary">Sign In</button>
+  <% end %>
+</div>

@@ -5,20 +5,19 @@ defmodule UltraSonicPi.UserSocket do
   channel "songs:*", UltraSonicPi.SongChannel
 
   ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket
-  # transport :longpoll, Phoenix.Transports.LongPoll
+  transport :websocket,
+    Phoenix.Transports.WebSocket,
+    check_origin: ["//localhost", "//127.0.0.1", "//example.com"]
+  # TODO: add domain configuration for production ^^^
 
-  # Socket params are passed from the client and can
-  # be used to verify and authenticate a user. After
-  # verification, you can put default assigns into
-  # the socket that will be set for all channels, ie
-  #
-  #     {:ok, assign(socket, :user_id, verified_user_id)}
-  #
-  # To deny connection, return `:error`.
-  #
-  # See `Phoenix.Token` documentation for examples in
-  # performing token verification on connect.
+  def connect(%{"token" => token}, socket) do
+    if username = UltraSonicPi.User.verify_token(socket, token) do
+      {:ok, assign(socket, :username, username)}
+    else
+      :error
+    end
+  end
+
   def connect(_params, socket) do
     {:ok, socket}
   end

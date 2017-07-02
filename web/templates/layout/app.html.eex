@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <%= tag :meta, name: "user_token", content: @user_token %>
 
     <title>Hello UltraSonicPi!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
@@ -24,7 +25,12 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+            <%= if @user_token do %>
+              <li><%= @username %></li>
+              <li><%= link("logout", to: logout_path(@conn, :logout)) %></li>
+            <%= else %>
+              <li><%= link("sign in", to: auth_path(@conn, :sign_in)) %></li>
+            <% end %>
           </ul>
         </nav>
         <span class="logo"></span>

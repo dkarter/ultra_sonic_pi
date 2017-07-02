@@ -7,6 +7,11 @@ defmodule UltraSonicPi.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :put_user_token
+  end
+
+  pipeline :authenticated_routes do
+    plug :require_authentication
   end
 
   pipeline :api do
@@ -17,20 +22,43 @@ defmodule UltraSonicPi.Router do
   end
 
   scope "/", UltraSonicPi do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PageController, :index
-    # get "/songs/:id", SongController, :show
-    # get "/songs", SongController, :index
+
+    post "/sign_in", AuthController, :authenticate
+    get "/sign_in", AuthController, :sign_in
+    get "/logout", AuthController, :logout, as: :logout
+  end
+
+  scope "/", UltraSonicPi do
+    pipe_through [:browser, :authenticated_routes]
 
     resources "/songs", SongController do
       resources "/messages", MessageController, only: [:index, :new, :create]
     end
-
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", UltraSonicPi do
-  #   pipe_through :api
-  # end
+  defp put_user_token(conn, _) do
+    token = get_session(conn, "user_token")
+    username = UltraSonicPi.User.verify_token(conn, token)
+
+    conn
+    |> assign(:user_token, token)
+    |> assign(:username, username)
+  end
+
+  defp require_authentication(conn, _) do
+    token = get_session(conn, "user_token")
+    username = UltraSonicPi.User.verify_token(conn, token)
+
+    if username do
+      conn
+    else
+      conn
+      |> put_flash(:info, "You must sign in to view this page")
+      |> redirect(to: "/sign_in")
+      |> halt()
+    end
+  end
 end

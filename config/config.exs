@@ -7,7 +7,8 @@ use Mix.Config
 
 # General application configuration
 config :ultra_sonic_pi,
-  ecto_repos: [UltraSonicPi.Repo]
+  ecto_repos: [UltraSonicPi.Repo],
+  auth_salt: System.get_env("AUTH_TOKEN_SALT")
 
 # Configures the endpoint
 config :ultra_sonic_pi, UltraSonicPi.Endpoint,
